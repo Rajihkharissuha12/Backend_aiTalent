@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model applicant {
+  id_applicant Int            @id @default(autoincrement())
+  id_job       Int?
+  name         String         @db.Char(32)
+  location     String         @db.Char(12)
+  intolerant   Int
+  job          job?           @relation(fields: [id_job], references: [id_job], onDelete: Cascade, map: "applicant_ibfk_1")
+  experience   experience[]
+  kepribadian  kepribadian[]
+  ketertarikan ketertarikan[]
+  score        score[]
+  sentimen     sentimen[]
+  skill        skill[]
+  sosmed       sosmed[]
+
+  @@index([id_job], map: "id_role")
+}
+
+model experience {
+  id_experience Int       @id @default(autoincrement())
+  id_applicant  Int
+  role          String    @db.VarChar(50)
+  employment    String    @db.VarChar(30)
+  company       String    @db.Char(40)
+  location      String    @db.Char(15)
+  start         DateTime  @db.Date
+  end           DateTime  @db.Date
+  applicant     applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "experience_ibfk_1")
+
+  @@index([id_applicant], map: "id_applicant")
+}
+
+model job {
+  id_job         Int         @id @default(autoincrement())
+  job_name       String      @db.VarChar(30)
+  description    String      @db.Text
+  tanggung_jawab String      @db.Text
+  keahlian       String      @db.Text
+  applicant      applicant[]
+}
+
+model kepribadian {
+  id_kepribadian Int       @id @default(autoincrement())
+  id_applicant   Int
+  open           Int
+  con            Int
+  extra          Int
+  agree          Int
+  neuro          Int
+  applicant      applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "kepribadian_ibfk_1")
+
+  @@index([id_applicant], map: "id_applicant")
+}
+
+model ketertarikan {
+  id_ketertarikan Int       @id @default(autoincrement())
+  id_applicant    Int
+  traveling       Int
+  musik           Int
+  art             Int
+  sport           Int
+  game            Int
+  cooking         Int
+  beauty          Int
+  social          Int
+  applicant       applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "ketertarikan_ibfk_1")
+
+  @@index([id_applicant], map: "id_applicant")
+}
+
+model score {
+  id_score     Int       @id @default(autoincrement())
+  id_applicant Int
+  uidesign     Int
+  frontend     Int
+  backend      Int
+  mobile       Int
+  dba          Int
+  applicant    applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "score_ibfk_1")
+
+  @@index([id_applicant], map: "id_applicant")
+}
+
+model sentimen {
+  id_sentimen  Int       @id @default(autoincrement())
+  id_applicant Int
+  positive     Int
+  negative     Int
+  applicant    applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "sentimen_ibfk_1")
+
+  @@index([id_applicant], map: "id_applicant")
+}
+
+model skill {
+  id_skill     Int       @id @default(autoincrement())
+  id_applicant Int
+  skill        String    @db.VarChar(50)
+  applicant    applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "skill_ibfk_1")
+
+  @@index([id_applicant], map: "id_applicant")
+}
+
+model sosmed {
+  id_sosmed    Int       @id @default(autoincrement())
+  id_applicant Int
+  twitter      String    @db.VarChar(50)
+  instagram    String    @db.VarChar(50)
+  linkedin     String    @db.VarChar(50)
+  gmail        String    @db.VarChar(50)
+  github       String    @db.VarChar(50)
+  whatsapp     Int
+  applicant    applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "sosmed_ibfk_1")
+
+  @@index([id_applicant], map: "id_applicant")
+}
