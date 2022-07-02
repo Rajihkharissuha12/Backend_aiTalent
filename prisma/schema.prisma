@@ -28,7 +28,6 @@ model applicant {
 model experience {
   id_experience Int       @id @default(autoincrement())
   id_applicant  Int
-  role          String    @db.VarChar(50)
   employment    String    @db.VarChar(30)
   company       String    @db.Char(40)
   location      String    @db.Char(15)
@@ -112,12 +111,12 @@ model skill {
 model sosmed {
   id_sosmed    Int       @id @default(autoincrement())
   id_applicant Int
-  twitter      String    @db.VarChar(50)
-  instagram    String    @db.VarChar(50)
-  linkedin     String    @db.VarChar(50)
+  twitter      String    @db.VarChar(100)
+  instagram    String    @db.VarChar(100)
+  linkedin     String    @db.VarChar(100)
   gmail        String    @db.VarChar(50)
   github       String    @db.VarChar(50)
-  whatsapp     Int
+  whatsapp     String    @db.VarChar(15)
   applicant    applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "sosmed_ibfk_1")
 
   @@index([id_applicant], map: "id_applicant")
