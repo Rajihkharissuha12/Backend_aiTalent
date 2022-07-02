@@ -45,6 +45,7 @@ model job {
   tanggung_jawab String      @db.Text
   keahlian       String      @db.Text
   applicant      applicant[]
+  score          score[]
 }
 
 model kepribadian {
@@ -79,14 +80,13 @@ model ketertarikan {
 model score {
   id_score     Int       @id @default(autoincrement())
   id_applicant Int
-  uidesign     Int
-  frontend     Int
-  backend      Int
-  mobile       Int
-  dba          Int
+  id_job       Int
+  score        Int
   applicant    applicant @relation(fields: [id_applicant], references: [id_applicant], onDelete: Cascade, map: "score_ibfk_1")
+  job          job       @relation(fields: [id_job], references: [id_job], onDelete: Cascade, map: "score_ibfk_2")
 
   @@index([id_applicant], map: "id_applicant")
+  @@index([id_job], map: "id_job")
 }
 
 model sentimen {

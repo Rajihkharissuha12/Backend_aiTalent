@@ -6,6 +6,7 @@ var logger = require("morgan");
 
 // Import router
 let jobRouter = require("./routes/jobs");
+let applicant = require("./routes/applicant");
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Use Router
 app.use("/", jobRouter);
+app.use("/", applicant);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
