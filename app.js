@@ -4,6 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+const cors = require("cors");
+app.use(cors());
+
 // Import router
 let jobRouter = require("./routes/jobs");
 let applicant = require("./routes/applicant");
