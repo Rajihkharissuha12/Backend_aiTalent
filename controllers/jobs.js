@@ -100,6 +100,7 @@ const getApplicantScoreByJob = async (req, res) => {
           select: {
             id_applicant: true,
             name: true,
+            avatar: true,
           },
         },
       },

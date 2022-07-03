@@ -16,6 +16,7 @@ const score = async (req, res, next) => {
         applicant: {
           select: {
             name: true,
+            avatar: true,
             location: true,
             sosmed: true,
           },

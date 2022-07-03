@@ -13,6 +13,7 @@ model applicant {
   name         String         @db.Char(32)
   location     String         @db.Char(12)
   intolerant   Int
+  avatar       String         @db.VarChar(255)
   job          job?           @relation(fields: [id_job], references: [id_job], onDelete: Cascade, map: "applicant_ibfk_1")
   experience   experience[]
   kepribadian  kepribadian[]
@@ -44,6 +45,7 @@ model job {
   description    String      @db.Text
   tanggung_jawab String      @db.Text
   keahlian       String      @db.Text
+  banner         String      @db.VarChar(255)
   applicant      applicant[]
   score          score[]
 }
