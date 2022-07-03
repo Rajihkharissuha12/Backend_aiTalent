@@ -117,10 +117,23 @@ const getApplicantScoreByJob = async (req, res) => {
   }
 };
 
+const getAllJobs = async (req, res) => {
+  try {
+    const allJobs = await db.job.findMany({});
+    if (allJobs) {
+      res.status(200).json({ allJobs });
+    } else {
+      res.status(404).json({ msg: "Not Found" });
+    }
+  } catch (err) {
+    res.status(500).json({ msg: "Something Wrong" });
+  }
+};
 module.exports = {
   getJobs,
   getJobDesc,
   getApplicantScoreByJob,
   getJobRes,
   getJobQua,
+  getAllJobs,
 };

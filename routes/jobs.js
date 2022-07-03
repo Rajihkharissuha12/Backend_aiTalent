@@ -19,5 +19,8 @@ router.post("/getJobQua", jobs.getJobQua);
 // Get applicant score
 router.post("/getApplicantScoreByJob", jobs.getApplicantScoreByJob);
 
+// Get all jobs
+router.get("/getAllJobs", jobs.getAllJobs);
+
 // Export module
 module.exports = router;
