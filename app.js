@@ -4,14 +4,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-const cors = require("cors");
-app.use(cors());
-
 // Import router
 let jobRouter = require("./routes/jobs");
 let applicant = require("./routes/applicant");
 let cors = require("cors");
 var app = express();
+app.use(cors);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -42,7 +40,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-app.use(cors);
 
 module.exports = app;
