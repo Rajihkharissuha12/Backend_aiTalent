@@ -43,7 +43,7 @@ const pengalamanKerja = async (req, res, next) => {
   try {
     const { idApplicant } = req.body;
     //mencari Applicant
-    const findApplicant = await db.experience.findFirst({
+    const findApplicant = await db.experience.findMany({
       where: {
         id_applicant: parseInt(idApplicant),
       },
