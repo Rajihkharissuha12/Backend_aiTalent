@@ -74,6 +74,7 @@ const getJobQua = async (req, res) => {
       },
       select: {
         keahlian: true,
+        banner: true,
       },
     });
     if (JobQua) {
